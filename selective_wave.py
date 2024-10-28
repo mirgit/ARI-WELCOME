@@ -69,7 +69,7 @@ class SimpleDance():
 	    if self._is_moving == False:
 		msg = None
 		try:
-		    msg = rospy.wait_for_message("texture_detector/pose", PoseStamped, timeout=4)
+		    msg = rospy.wait_for_message("texture_detector/pose", PoseStamped, timeout=7)
 		except:
 		    pass
 	        if msg is not None:
