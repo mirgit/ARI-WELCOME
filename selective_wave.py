@@ -39,38 +39,10 @@ class SimpleDance():
 	return client.get_result()
 
 
-    def move_circle(self):
-	pub = rospy.Publisher('key_vel', Twist, queue_size=10)
-        for j in range(115):
-		move = self._get_twist(0.75, math.radians(36))
-		pub.publish(move)
-		self._rate.sleep()
-	rospy.spin()
-
-
-
-    def goal_pose(self, pose):
-	
-	pub = rospy.Publisher("/move_base_simple/goal", PoseStamped, queue_size=10)
-	msg = PoseStamped()
-	msg.pose.position.x = 2
-	msg.pose.position.y = 4
-	pub.publish(msg)
-	while not rospy.is_shutdown():
-	    pub.publish(msg)
-	    self._rate.sleep()
-#	client = SimpleActionClient('/move_base', MoveBaseAction)
-#	client.wait_for_server()
-#	goal_pose = MoveBaseGoal()
-#	goal_pose.target_pose.header.frame_id = 'map'
-#	goal_pose.target_pose.pose.position.x = 2
-#	goal_pose.target_pose.pose.position.y = 4
-#	client.send_goal(goal_pose)
-
     def _random_walk(self):
 	while self._is_moving:
 	    linear = random.random()
-	    angular = random.gauss(0,90)
+	    angular = random.gauss(0,45)
 	    move = self._get_twist(linear, math.radians(angular))
 	    self._pub.publish(move)
 	    self._rate.sleep()
