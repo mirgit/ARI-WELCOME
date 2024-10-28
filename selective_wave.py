@@ -84,7 +84,7 @@ class SimpleDance():
 
 
 def main():
-    rospy.init_node('ari_says_hi')
+    rospy.init_node('ARI_Welcome')
     app = SimpleDance()
     app.main_fun()
 #    app.wave()
