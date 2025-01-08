@@ -1,0 +1,36 @@
+rosrun key_teleop key_teleop.py
+
+cd ari_public_ws
+source ./devel/setup.bash
+roslaunch ari_gazebo ari_gazebo.launch public_sim:=true world:=simple_office_with_people
+roslaunch ari_gazebo ari_gazebo.launch public_sim:=true world:=tutorial_office
+
+MY CODE:
+cd src/ari_says_hi
+rosrun ari_says_hi selective_wave.py 
+
+
+NEW PACKAGE:
+cd ~/catkin_ws/src
+catkin_create_pkg beginner_tutorials std_msgs rospy roscpp
+source ./devel/setup.bash
+roscd beginner_tutorials
+
+
+ROS:
+$ rospy.spin() # spin() simply keeps python from exiting until this node is stopped
+
+
+PLAY MOTION:
+$ rosrun play_motion run_motion_python_node.py :
+	where MOTION_NAME must be one of the motions listed in: ['nod', 'alive_4', 'alive_7', 'alive_6', 'shake_left', 'shake_right', 		'bow', 'alive_5', 'alive_2', 'look_around', 'alive_3', 'alive_1', 'show_right', 'wave', 'show_left', 'start_ari']
+
+$ rosparam get /play_motion/motions/bow/joints
+$ rosparam get /play_motion/motions/bow/points
+
+PERSON DETECTOR:
+roslaunch pal_person_detector_opencv detector.launch image:=/head_front_camera/color/image_raw
+
+TEXTURE_DETECTOR:
+roslaunch pal_texture_detector texture_detector.launch rectified_image:=/head_front_camera/color/image_raw camera_info:=/head_front_camera/color/camera_info
+
